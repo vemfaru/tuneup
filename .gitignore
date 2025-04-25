@@ -1,0 +1,54 @@
+# Ignore Gradle cache directories recursively
+**/.gradle/
+
+# Ignore build directories recursively (Android/Gradle, KMP, etc.)
+**/build/
+
+# Ignore Android APK files
+*.apk
+
+# Ignore packed Android resources
+*.ap_
+
+# Ignore Android release build outputs
+app/release/
+
+# Ignore Android debug build outputs
+app/debug/
+
+# Ignore desktop build outputs
+out/
+
+# Ignore Kotlin Multiplatform-specific build directories
+kotlin-build/
+.kotlin/
+
+# Ignore macOS-specific metadata files
+.DS_Store
+
+# Ignore all IntelliJ/Android Studio configuration files
+.idea/*
+
+# Except for code style settings (keep these for shared formatting rules)
+!.idea/codeStyles/
+
+# Ignore IntelliJ module metadata files
+*.iml
+
+# Ignore local SDK paths (machine-specific)
+local.properties
+
+# Ignore Xcode workspace files
+*.xcworkspace
+
+# Ignore Xcode user-specific project data
+*.xcodeproj/xcuserdata
+
+# Ignore Xcode user settings
+xcuserdata/
+
+# Ignore Windows executables
+*.exe
+
+# Ignore macOS disk image files
+*.dmg
