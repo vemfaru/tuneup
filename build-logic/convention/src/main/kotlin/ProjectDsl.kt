@@ -5,7 +5,6 @@ import com.kmptuner.buildlogic.options.android.AndroidAppBuilder
 import com.kmptuner.buildlogic.options.android.AndroidAppOptions
 import com.kmptuner.buildlogic.options.android.AndroidLibraryBuilder
 import com.kmptuner.buildlogic.options.android.AndroidLibraryOptions
-import com.kmptuner.buildlogic.plugins.KmpDsl
 import org.gradle.api.Project
 import org.gradle.internal.extensions.core.extra
 
@@ -44,25 +43,4 @@ fun Project.installDefaults(
             compilationOptions
         )
     )
-}
-
-/**
- * Configures the Kotlin Multiplatform DSL for the project.
- *
- * Example of usage:
- * ```kotlin
- * kotlinMultiplatform {
- *    common {
- *      main.dependencies { }
- *      test.dependencies { }
- *    }
- *    android { .. }
- *    ios { .. }
- *    desktop { .. }
- *}
- * ```
- * @see KmpDsl
- * */
-fun Project.kotlinMultiplatform(block: KmpDsl.() -> Unit) {
-    extensions.configure<KmpDsl>("kmpDsl", block)
 }

@@ -1,3 +1,5 @@
+import com.kmptuner.buildlogic.plugins.composeMultiplatform
+
 plugins {
     kotlin("android")
     id("kmptuner.android.app")
@@ -13,3 +15,5 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
 }
+
+composeMultiplatform()

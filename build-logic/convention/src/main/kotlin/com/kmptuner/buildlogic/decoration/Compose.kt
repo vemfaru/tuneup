@@ -14,28 +14,43 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-fun Project.setupCompose(
+/**
+ * Applies the Compose Multiplatform configuration to the project.
+ *
+ * This function sets up the necessary dependencies and configurations for using Jetpack Compose
+ * in a multiplatform project.
+ *
+ * @param composeOptionsBuilder A lambda function to configure the [ComposeOptions].
+ */
+fun Project.composeMultiplatform(
+    composeOptionsBuilder: ComposeOptionsBuilder = {
+        ComposeOptions.Builder().build()
+    }
+) {
+    runCatching {
+        val composeOptions = ComposeOptions.Builder()
+            .apply(composeOptionsBuilder)
+            .build()
+
+        project.setupCompose(composeOptions)
+    }.onFailure {
+        logger.error("Failed to configure Compose Multiplatform: ${it.message}")
+    }
+}
+
+internal fun Project.setupCompose(
     composeOptions: ComposeOptions
 ) {
-    println("setupCompose() called with options: $composeOptions")
     setupComposeCompiler()
-    println("setupComposeCompiler() called")
-
-//    setupComposeTooling(true)
-//    println("setupComposeTooling() called with enableTooling: ${composeOptions.enableTooling}")
+    setupComposeTooling(composeOptions.enableTooling)
     setupComposeRuntime()
-    println("setupComposeRuntime() called")
     setupAndroidCompose()
-    println("setupAndroidCompose() called")
 }
 
 /**
  * Sets up the Android Compose feature for the project.
  * */
 fun Project.setupAndroidCompose() {
-    if (commonExtension == null) {
-        pluginManager.apply("com.android.library")
-    }
     commonExtension?.buildFeatures?.compose = true
 }
 
@@ -61,7 +76,8 @@ private fun Project.setupComposeTooling(enableTooling: Boolean) {
 private fun Project.setupComposeRuntime() {
     extensions.findByType<KotlinMultiplatformExtension>()?.run {
         sourceSets.getByName("commonMain").dependencies {
-            implementation("org.jetbrains.compose.runtime:runtime:1.8.0-beta02")
+            val composeVersion = libs.findVersion("compose").get()
+            implementation("org.jetbrains.compose.runtime:runtime:$composeVersion")
         }
     }
 }

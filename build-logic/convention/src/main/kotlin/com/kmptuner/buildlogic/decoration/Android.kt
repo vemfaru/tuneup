@@ -206,14 +206,4 @@ private fun <T : DefaultConfig> Project.setProguardFiles(
     consume: T.(Array<Any>) -> Unit
 ) {
     config.consume(arrayOf(androidProguardOptions.fileName))
-//    if (androidProguardOptions.applyWithOptimizedVersion) {
-//        config.consume(
-//            arrayOf(
-//                getDefaultProguardFile("proguard-android-optimize.txt", layout.buildDirectory),
-//                androidProguardOptions.fileName
-//            )
-//        )
-//    } else {
-//        config.consume(arrayOf(androidProguardOptions.fileName))
-//    }
 }
