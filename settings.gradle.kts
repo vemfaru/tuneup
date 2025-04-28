@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 include(":shared")
 include(":core:design-system")
 include(":app:android")
+include(":app:ios:interop")
